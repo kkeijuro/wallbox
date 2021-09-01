@@ -3,7 +3,7 @@
 #include "exe_12.hpp"
 
 DeviceInformation::DeviceInformation(std::string connection_type, std::string name, uint64_t uid):
-    name(name), connection_type(connection_type), uid(uid) {
+        connection_type(connection_type), name(name), uid(uid) {
 
 };
 

@@ -1,6 +1,6 @@
 class DeviceInformation {
 public:
-    DeviceInformation(std::string name, std::string connection_type, uint64_t uid);
+    DeviceInformation(std::string connection_type, std::string name, uint64_t uid);
     std::string getConnectionType() const;
     std::string getName() const;
     uint64_t getUID() const;
