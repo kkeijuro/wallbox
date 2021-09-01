@@ -4,11 +4,11 @@ struct Vehicle {
 	virtual void Move() {std::cout<<"Going to fly"<<std::endl;}
 };
 
-struct WheelVehicle: Vehicle {
+struct WheelVehicle: virtual Vehicle {
 	virtual void TurnRight() {}
 };
 
-struct WingVehicle: Vehicle {
+struct WingVehicle: virtual Vehicle {
 	virtual void TakeOff() {}
 };
 

@@ -61,38 +61,6 @@ struct {
 } Sort_Date;
 
 /*
- *  FILTERS AVAILABLE
- *
- */
-
-struct ContainsPermissionFilter {
-        ContainsPermissionFilter(char contains_value): contains_value(contains_value){};
-        bool operator()(const FileInformation& file_information_lcmp) const {
-             return file_information_lcmp.getPermissions().find(contains_value) == std::string::npos;
-        }
-        private:
-        char contains_value;
-};
-
-struct OwnerFilter {
-    OwnerFilter(std::string owner): owner(owner){};
-    bool operator()(const FileInformation& file_information_lcmp) const {
-        return file_information_lcmp.getOwner() != this->owner;
-    }
-private:
-    std::string owner;
-};
-
-struct MaxSizeFilter {
-    MaxSizeFilter(uint64_t max_size): max_size(max_size){};
-    bool operator()(const FileInformation& file_information_lcmp) const {
-        return file_information_lcmp.getSize() < max_size;
-    }
-private:
-    uint64_t max_size;
-};
-
-/*
  * FILE INFORMATION MANAGEMENT
  */
 
@@ -124,23 +92,4 @@ FileInformation FileInformationManagement::getFile() {
     if(this->begin_it == this->file_container.end())
         return FileInformation("NO FILE");
     return *this->begin_it;
-};
-
-int main () {
-    FileInformationManagement file_management;
-    std::ifstream infile("file_info.txt");
-    std::string line;
-
-    while(std::getline(infile, line)) {
-        FileInformation new_file_information = FileInformation::create_instance(line);
-        file_management.addFileInformation(new_file_information);
-    }
-    file_management.applyFilter(ContainsPermissionFilter('x'));
-    file_management.applyFilter(OwnerFilter("admin"));
-    file_management.applyFilter(MaxSizeFilter(14*pow(2, 20)));
-    file_management.sortByDate();
-    file_management.showFiles();
-    std::cout<<std::endl;
-    std::cout<<"Last File:" <<file_management.getFile();
-    return 0;
 };

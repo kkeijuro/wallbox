@@ -36,6 +36,7 @@ std::string TextParser::parseDevice(const DeviceInformation& device_information)
 };
 
 int main() {
+    /* Strategy pattern */
     DeviceInformation device_information("Serial", "Simulated_Device", 12345);
     DeviceInformationParser* parser = new JSonParser();
     std::cout<<" Return: " << parser->parseDevice(device_information)<<std::endl;

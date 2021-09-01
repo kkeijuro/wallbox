@@ -27,6 +27,8 @@ std::bitset<number_of_flips> get_mask_B() {
     return mask;
 };
 
+/* Based on XOR and then counting bits to 1*/
+
 int main() {
     std::bitset<number_of_flips> mask_A = get_mask_A();
     std::bitset<number_of_flips> mask_B = get_mask_B();

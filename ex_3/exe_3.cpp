@@ -28,11 +28,11 @@ void find_ordered_divisible_pairs(const std::set<XY*>& xy_set, int divisor, std:
 
 static constexpr int A = 2;
 static constexpr int B = 4;
-static constexpr int C = 3;
 static constexpr int O = 10;
 static constexpr int P = 10;
  
 int main(int argc, char** argv) {
+     // Data Creation
     std::cout<<"A: "<<A<<" B: "<<B<<" O: "<<O<<" P: "<<P<<std::endl;
     std::set<XY*> xy_original_set;
     for(int index_x = 1; index_x<=O; index_x++)
@@ -41,10 +41,10 @@ int main(int argc, char** argv) {
             xy_original_set.insert(xy_instance);
 	}
 
-    /* This is a first idea for the algortihm, to be able to add divisors easyly*/
+    /* This is a first idea for the algorithm, to be able to add divisors easily*/
     std::set<XY*> filtered_result;
     std::set<XY*> xy_set = xy_original_set;
-    std::vector<int> divisor_values{A,B, C};
+    std::vector<int> divisor_values{A,B};
     for(std::vector<int>::iterator it = divisor_values.begin(); it != divisor_values.end(); it++) {
 	std::cout<<"Divisor: "<<*it<<std::endl;
     	find_ordered_divisible_pairs(xy_set, *it, filtered_result);

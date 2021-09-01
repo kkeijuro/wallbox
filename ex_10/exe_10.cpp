@@ -32,6 +32,9 @@ static void print_cars() {
 
 int main() {
     print_cars();
+    /*
+     * Ok, is a very large line, but still just one line ;)
+     */
     std::sort(e_vehicles.begin(), e_vehicles.end(), [](const ElectricVehicle& e_vehicle_lcmp, const ElectricVehicle& e_vehicle_rcmp){
                                                             return e_vehicle_rcmp.getMaxEnergy() < e_vehicle_lcmp.getMaxEnergy();
                                                         });
