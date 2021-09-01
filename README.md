@@ -10,10 +10,11 @@ Where N is the number of the test, except in ex_5:
 
 g++ -std=c++14 main.cpp exe_5.cpp -o exe
 
-And call exe.
+And execute exe file.
 
+(std version may be less than c++14 for most of exercises) 
 
 Future improvements:
 
-Add cmakefile to compile all the examples
-Add test for each exercise
+.- Add cmakefile to compile all the examples
+.- Add test for each exercise
