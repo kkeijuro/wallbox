@@ -93,3 +93,8 @@ FileInformation FileInformationManagement::getFile() {
         return FileInformation("NO FILE");
     return *this->begin_it;
 };
+
+void FileInformationManagement::reset(){
+    this->begin_it = this->file_container.begin();
+    this->end_it = this->file_container.end();
+};
