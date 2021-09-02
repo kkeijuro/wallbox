@@ -7,12 +7,9 @@
 constexpr uint32_t number_of_flips = 10;
 
 
-std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> good_flips_results = {{0b1010101010, 0},
+std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> flips_results = {{0b1010101010, 0},
                                                                                     {0b1010101011, 1},
                                                                                     {0b1010101111, 2}};
-
-std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> bad_flips_results = {{0b1010101010, 1},
-                                                                                   {0b1010101011, 2}};
 
 std::bitset<number_of_flips> get_mask_A() {
     std::bitset<number_of_flips> mask{};
@@ -49,17 +46,10 @@ uint32_t check_flips(std::bitset<number_of_flips> flips_result) {
 
 
 int main() {
-    for (const auto& pair_values: good_flips_results) {
+    for (const auto& pair_values: flips_results) {
         auto flips_result = pair_values.first;
         uint32_t expected_result = pair_values.second;
         uint32_t result = check_flips(flips_result);
         assert(expected_result == result);
-    }
-
-    for (const auto& pair_values: bad_flips_results) {
-        auto flips_result = pair_values.first;
-        uint32_t expected_result = pair_values.second;
-        uint32_t result = check_flips(flips_result);
-        assert(expected_result != result);
     }
 }
