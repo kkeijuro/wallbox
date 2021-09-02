@@ -1,9 +1,18 @@
 #include <bitset>
 #include <cassert>
 #include <iostream>
+#include <utility>
+#include <vector>
 
 constexpr uint32_t number_of_flips = 10;
-constexpr std::bitset<number_of_flips> flip_results = 0b1010101010;
+
+
+std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> good_flips_results = {{0b1010101010, 0},
+                                                                                    {0b1010101011, 1},
+                                                                                    {0b1010101111, 2}};
+
+std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> bad_flips_results = {{0b1010101010, 1},
+                                                                                   {0b1010101011, 2}};
 
 std::bitset<number_of_flips> get_mask_A() {
     std::bitset<number_of_flips> mask{};
@@ -29,12 +38,28 @@ std::bitset<number_of_flips> get_mask_B() {
 
 /* Based on XOR and then counting bits to 1*/
 
+uint32_t check_flips(std::bitset<number_of_flips> flips_result) {
+    std::bitset <number_of_flips> mask_A = get_mask_A();
+    std::bitset <number_of_flips> mask_B = get_mask_B();
+    std::bitset <number_of_flips> mask_result_A = mask_A ^flips_result;
+    std::bitset <number_of_flips> mask_result_B = mask_B ^flips_result;
+    uint32_t result = std::min(mask_result_A.count(), mask_result_B.count());
+    return result;
+}
+
+
 int main() {
-    std::bitset<number_of_flips> mask_A = get_mask_A();
-    std::bitset<number_of_flips> mask_B = get_mask_B();
-    std::bitset<number_of_flips> mask_result_A = mask_A^flip_results;
-    std::bitset<number_of_flips> mask_result_B = mask_B^flip_results;
-    std::cout<< mask_result_A << std::endl;
-    std::cout<< mask_result_B << std::endl;
-    std::cout<< "Total changes needed: "<< std::min(mask_result_A.count(), mask_result_B.count())<<std::endl;
+    for (const auto& pair_values: good_flips_results) {
+        auto flips_result = pair_values.first;
+        uint32_t expected_result = pair_values.second;
+        uint32_t result = check_flips(flips_result);
+        assert(expected_result == result);
+    }
+
+    for (const auto& pair_values: bad_flips_results) {
+        auto flips_result = pair_values.first;
+        uint32_t expected_result = pair_values.second;
+        uint32_t result = check_flips(flips_result);
+        assert(expected_result != result);
+    }
 }
