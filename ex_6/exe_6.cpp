@@ -14,7 +14,10 @@ std::vector<std::pair<std::bitset<number_of_flips>, uint8_t>> flips_results = {{
                                                                                {0b1011111111, 4},
                                                                                {0b1111111111, 5},
                                                                                {0b0111111111, 4},
-                                                                               {0b0000000000, 5}};
+                                                                               {0b0101111111, 3},
+                                                                               {0b0101011111, 2},
+                                                                               {0b0101010111, 1},
+                                                                               {0b0101010101, 0}};
 
 std::bitset<number_of_flips> get_mask_A() {
     std::bitset<number_of_flips> mask{};
